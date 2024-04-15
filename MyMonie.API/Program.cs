@@ -5,7 +5,6 @@ using MyMonie.API;
 using MyMonie.Core.Middlewares;
 using MyMonie.Core.Models.App;
 using Serilog;
-using System.Configuration;
 
 Log.Logger = new LoggerConfiguration()
     .WriteTo.Console()
