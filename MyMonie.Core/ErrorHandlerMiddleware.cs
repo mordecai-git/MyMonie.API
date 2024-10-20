@@ -9,7 +9,7 @@ using System.Net;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace MyMonie.Core.Middlewares;
+namespace MyMonie.Core;
 
 public class ErrorHandlerMiddleware
 {

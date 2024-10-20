@@ -8,9 +8,6 @@
 
     <ItemGroup>
       <Folder Include="Enums\" />
-      <Folder Include="Models\App\" />
-      <Folder Include="Models\Configurations\" />
-      <Folder Include="Models\Input\" />
       <Folder Include="Utilities\" />
     </ItemGroup>
 
@@ -39,6 +36,10 @@
       <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="6.0.0" />
       <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
       <PackageReference Include="Serilog.AspNetCore" Version="6.1.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\MyMonie.Models\MyMonie.Models.csproj" />
     </ItemGroup>
 
 </Project>

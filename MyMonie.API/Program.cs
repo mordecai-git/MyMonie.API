@@ -6,7 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MyMonie.API;
-using MyMonie.Core.Middlewares;
+using MyMonie.Core;
 using MyMonie.Core.Models.App;
 using Serilog;
 

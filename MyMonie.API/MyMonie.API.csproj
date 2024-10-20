@@ -24,6 +24,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\MyMonie.Core\MyMonie.Core.csproj" />
+      <ProjectReference Include="..\MyMonie.Models\MyMonie.Models.csproj" />
     </ItemGroup>
 
 </Project>
