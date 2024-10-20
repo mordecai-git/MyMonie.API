@@ -1,9 +1,13 @@
-using System.Diagnostics;
-using System.Net;
-using System.Text.Json;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using MyMonie.Core.Models.Utilities;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Net;
+using System.Text.Json;
+using System.Threading.Tasks;
 
 namespace MyMonie.Core.Middlewares;
 
@@ -31,22 +35,15 @@ public class ErrorHandlerMiddleware
 
             _logger.LogError("Actual Error: {Error}", error);
 
-            switch (error)
+            response.StatusCode = error switch
             {
                 //case AppException e:
                 //    // custom application error
                 //    response.StatusCode = (int)HttpStatusCode.BadRequest;
                 //    break;
-                case KeyNotFoundException e:
-                    // not found error
-                    response.StatusCode = (int)HttpStatusCode.NotFound;
-                    break;
-                default:
-                    // unhandled error
-                    response.StatusCode = (int)HttpStatusCode.InternalServerError;
-                    break;
-            }
-
+                KeyNotFoundException => (int)HttpStatusCode.NotFound,// not found error
+                _ => (int)HttpStatusCode.InternalServerError,// unhandled error
+            };
             JsonSerializerOptions options = new() { WriteIndented = true, PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
 
             var result = JsonSerializer.Serialize(new ErrorResult
@@ -66,10 +63,10 @@ public class ErrorHandlerMiddleware
         }
     }
 
-    private TraceInfo GetErrorTraceInfo(Exception ex)
+    private static TraceInfo GetErrorTraceInfo(Exception ex)
     {
         //Get a StackTrace object for the exception
-        StackTrace st = new StackTrace(ex, true);
+        StackTrace st = new(ex, true);
 
         var traceInfo = new List<TraceInfo>();
 
@@ -79,7 +76,7 @@ public class ErrorHandlerMiddleware
 
         if (frame == null) return new TraceInfo();
 
-        TraceInfo trace = new TraceInfo
+        TraceInfo trace = new()
         {
             FileName = frame.GetFileName(),
             MethodName = frame.GetMethod().Name,

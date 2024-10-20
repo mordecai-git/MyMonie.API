@@ -4,9 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyMonie.Core.Middlewares
+namespace MyMonie.Core.Middlewares;
+
+internal class ValidationExceptionMiddleware
 {
-    internal class ValidationExceptionMiddleware
-    {
-    }
 }

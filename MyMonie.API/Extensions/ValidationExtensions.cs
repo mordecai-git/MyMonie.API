@@ -1,6 +1,5 @@
-﻿namespace MyMonie.API.Extensions
+﻿namespace MyMonie.API.Extensions;
+
+public class ValidationExtensions
 {
-    public class ValidationExtensions
-    {
-    }
 }

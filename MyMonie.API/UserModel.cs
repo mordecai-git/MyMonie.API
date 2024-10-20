@@ -1,23 +1,22 @@
 ﻿using FluentValidation;
 
-namespace MyMonie.API
+namespace MyMonie.API;
+
+public class UserModel
 {
-    public class UserModel
-    {
-        public string Name { get; set; }
-        public string Description { get; set; }
-    }
+    public string Name { get; set; }
+    public string Description { get; set; }
+}
 
-    public class UserModelValidator : AbstractValidator<UserModel>
-    {
-        public UserModelValidator() {
-            RuleFor(item => item.Name)
-                .NotEmpty()
-                .WithMessage("Name is required.");
+public class UserModelValidator : AbstractValidator<UserModel>
+{
+    public UserModelValidator() {
+        RuleFor(item => item.Name)
+            .NotEmpty()
+            .WithMessage("Name is required.");
 
-            RuleFor(item => item.Description)
-                .NotEmpty()
-                .WithMessage("Description is required.");
-        }
+        RuleFor(item => item.Description)
+            .NotEmpty()
+            .WithMessage("Description is required.");
     }
 }

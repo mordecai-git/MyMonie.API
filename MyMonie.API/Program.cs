@@ -1,6 +1,10 @@
 
 using FluentValidation;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using MyMonie.API;
 using MyMonie.Core.Middlewares;
 using MyMonie.Core.Models.App;
@@ -26,7 +30,7 @@ builder.Services.AddDbContext<MyMonieContext>(options =>
 {
     var df = builder.Configuration.GetConnectionString("MyMonie");
     options.UseSqlServer(builder.Configuration.GetConnectionString("MyMonie"));
-    options.LogTo(Console.WriteLine, LogLevel.Information);
+    //options.LogTo(Console.WriteLine, LogLevel.Information); // TODO
 });
 
 var app = builder.Build();
@@ -38,7 +42,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseSwagger();
-    app.UseSwaggerUI();
+app.UseSwaggerUI();
 
 app.UseMiddleware<ErrorHandlerMiddleware>();
 

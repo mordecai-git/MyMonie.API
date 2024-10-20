@@ -1,3 +1,6 @@
+using System;
+using System.Threading.Tasks;
+
 namespace MyMonie.Core.Interfaces;
 
 public interface ICacheService
