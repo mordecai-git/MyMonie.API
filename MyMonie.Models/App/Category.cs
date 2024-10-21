@@ -1,21 +1,22 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using MyMonie.Core.Models.App;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
 
-namespace MyMonie.Core.Models.App;
+namespace MyMonie.Models.App;
 
 [Table("Categories", Schema = "dbo")]
 public partial class Category
 {
     public Category()
     {
-        Budgets = new HashSet<Budget>();
-        RepeatTransactions = new HashSet<RepeatTransaction>();
-        Transactions = new HashSet<Transaction>();
-        UserCategoryCategories = new HashSet<UserCategory>();
-        UserCategoryParents = new HashSet<UserCategory>();
+        Budgets = [];
+        RepeatTransactions = [];
+        Transactions = [];
+        UserCategoryCategories = [];
+        UserCategoryParents = [];
     }
 
     [Key]

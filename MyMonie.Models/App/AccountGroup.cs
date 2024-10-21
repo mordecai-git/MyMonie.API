@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+using MyMonie.Models.App;
 
 namespace MyMonie.Core.Models.App;
 
@@ -11,7 +12,7 @@ public partial class AccountGroup
 {
     public AccountGroup()
     {
-        Accounts = new HashSet<Account>();
+        Accounts = [];
     }
 
     [Key]

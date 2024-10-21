@@ -11,8 +11,8 @@ public partial class Account
 {
     public Account()
     {
-        LoanRepayments = new HashSet<LoanRepayment>();
-        Loans = new HashSet<Loan>();
+        LoanRepayments = [];
+        Loans = [];
     }
 
     [Key]

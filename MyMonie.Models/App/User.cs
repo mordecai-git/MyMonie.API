@@ -1,25 +1,26 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using MyMonie.Core.Models.App;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
 
-namespace MyMonie.Core.Models.App;
+namespace MyMonie.Models.App;
 
 [Table("Users", Schema = "dbo")]
-[Microsoft.EntityFrameworkCore.Index(nameof(Email), Name = "UQ__Users__A9D10534EC57A06E", IsUnique = true)]
+[Index(nameof(Email), Name = "UQ__Users__A9D10534EC57A06E", IsUnique = true)]
 public partial class User
 {
     public User()
     {
-        AccountGroups = new HashSet<AccountGroup>();
-        Budgets = new HashSet<Budget>();
-        Categories = new HashSet<Category>();
-        Codes = new HashSet<Code>();
-        Loans = new HashSet<Loan>();
-        RepeatTransactions = new HashSet<RepeatTransaction>();
-        Transactions = new HashSet<Transaction>();
-        UserCategories = new HashSet<UserCategory>();
+        AccountGroups = [];
+        Budgets = [];
+        Categories = [];
+        Codes = [];
+        Loans = [];
+        RepeatTransactions = [];
+        Transactions = [];
+        UserCategories = [];
     }
 
     [Key]

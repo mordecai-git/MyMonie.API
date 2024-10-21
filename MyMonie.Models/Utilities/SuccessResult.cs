@@ -1,3 +1,5 @@
+using MyMonie.Models.Utilities;
+
 namespace MyMonie.Core.Models.Utilities;
 
 public class SuccessResult : Result

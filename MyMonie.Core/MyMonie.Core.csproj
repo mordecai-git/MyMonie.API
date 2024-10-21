@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net6.0</TargetFramework>
+        <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>disable</ImplicitUsings>
         <Nullable>disable</Nullable>
     </PropertyGroup>
@@ -12,30 +12,28 @@
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="EntityFramework" Version="6.4.4" />
-      <PackageReference Include="FluentValidation" Version="11.8.0" />
+      <PackageReference Include="EntityFramework" Version="6.5.1" />
       <PackageReference Include="LazyCache" Version="2.4.0" />
-      <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.20" />
-      <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+      <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.10" />
       <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="6.0.0-preview.4.21253.5" />
-      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.0" />
-      <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="6.0.0" />
-      <PackageReference Include="Microsoft.EntityFrameworkCore.Analyzers" Version="6.0.0" />
-      <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.0">
+      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.10" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="8.0.10" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Analyzers" Version="8.0.10" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.10">
         <PrivateAssets>all</PrivateAssets>
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       </PackageReference>
-      <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="6.0.0" />
-      <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.0" />
-      <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.0">
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="8.0.10" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.10" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.10">
         <PrivateAssets>all</PrivateAssets>
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       </PackageReference>
-      <PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.0" />
-      <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="6.0.0" />
-      <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="6.0.0" />
-      <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
-      <PackageReference Include="Serilog.AspNetCore" Version="6.1.0" />
+      <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
+      <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="8.0.2" />
+      <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="8.0.1" />
+      <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.1" />
+      <PackageReference Include="Serilog.AspNetCore" Version="8.0.3" />
     </ItemGroup>
 
     <ItemGroup>

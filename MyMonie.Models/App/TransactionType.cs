@@ -11,9 +11,9 @@ public partial class TransactionType
 {
     public TransactionType()
     {
-        RepeatTransactions = new HashSet<RepeatTransaction>();
-        Transactions = new HashSet<Transaction>();
-        UserCategories = new HashSet<UserCategory>();
+        RepeatTransactions = [];
+        Transactions = [];
+        UserCategories = [];
     }
 
     [Key]

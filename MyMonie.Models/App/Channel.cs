@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+using MyMonie.Models.App;
 
 namespace MyMonie.Core.Models.App;
 
@@ -11,11 +12,11 @@ public partial class Channel
 {
     public Channel()
     {
-        DarkModes = new HashSet<DarkMode>();
-        Loans = new HashSet<Loan>();
-        RepeatTransactions = new HashSet<RepeatTransaction>();
-        Transactions = new HashSet<Transaction>();
-        Users = new HashSet<User>();
+        DarkModes = [];
+        Loans = [];
+        RepeatTransactions = [];
+        Transactions = [];
+        Users = [];
     }
 
     [Key]

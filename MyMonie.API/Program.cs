@@ -7,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MyMonie.API;
 using MyMonie.Core;
-using MyMonie.Core.Models.App;
+using MyMonie.Models.App;
 using Serilog;
 
 Log.Logger = new LoggerConfiguration()

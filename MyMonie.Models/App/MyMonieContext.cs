@@ -1,17 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-//using System.Data.Entity;
+using MyMonie.Core.Models.App;
 
-namespace MyMonie.Core.Models.App;
+namespace MyMonie.Models.App;
 
-public partial class MyMonieContext : DbContext
+public partial class MyMonieContext(DbContextOptions<MyMonieContext> options) : DbContext(options)
 {
     protected readonly IConfiguration Configuration;
-
-    public MyMonieContext(DbContextOptions<MyMonieContext> options)
-        : base(options)
-    {
-    }
 
     public virtual DbSet<Account> Accounts { get; set; } = null!;
     public virtual DbSet<AccountGroup> AccountGroups { get; set; } = null!;

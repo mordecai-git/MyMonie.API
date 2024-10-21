@@ -11,7 +11,7 @@ public partial class LoanInterest
 {
     public LoanInterest()
     {
-        Loans = new HashSet<Loan>();
+        Loans = [];
     }
 
     [Key]

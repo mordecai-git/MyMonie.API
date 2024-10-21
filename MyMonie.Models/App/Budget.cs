@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MyMonie.Models.App;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -6,7 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace MyMonie.Core.Models.App;
 
 [Table("Budgets", Schema = "dbo")]
-[Microsoft.EntityFrameworkCore.Index(nameof(UserId), nameof(Period), nameof(CategoryId), Name = "Budgets_index_0", IsUnique = true)]
+[Index(nameof(UserId), nameof(Period), nameof(CategoryId), Name = "Budgets_index_0", IsUnique = true)]
 public partial class Budget
 {
     [Key]

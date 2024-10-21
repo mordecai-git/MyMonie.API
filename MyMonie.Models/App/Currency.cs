@@ -11,8 +11,8 @@ public partial class Currency
 {
     public Currency()
     {
-        UserSettingPrimaryCurrencies = new HashSet<UserSetting>();
-        UserSettingSecondaryCurrencies = new HashSet<UserSetting>();
+        UserSettingPrimaryCurrencies = [];
+        UserSettingSecondaryCurrencies = [];
     }
 
     [Key]

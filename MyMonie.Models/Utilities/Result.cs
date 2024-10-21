@@ -1,7 +1,8 @@
 using MyMonie.Core.Interfaces;
+using MyMonie.Core.Models.Utilities;
 using System.Collections.Generic;
 
-namespace MyMonie.Core.Models.Utilities;
+namespace MyMonie.Models.Utilities;
 
 public class Result<T>
 {

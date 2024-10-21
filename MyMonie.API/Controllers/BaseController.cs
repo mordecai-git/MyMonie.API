@@ -1,6 +1,6 @@
 using System.Net;
 using Microsoft.AspNetCore.Mvc;
-using MyMonie.Core.Models.Utilities;
+using MyMonie.Models.Utilities;
 
 namespace MyMonie.API.Controllers;
 

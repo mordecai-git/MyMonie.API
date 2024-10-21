@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MyMonie.Models.App;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -11,8 +12,8 @@ public partial class Loan
 {
     public Loan()
     {
-        LoanInterests = new HashSet<LoanInterest>();
-        LoanRepayments = new HashSet<LoanRepayment>();
+        LoanInterests = [];
+        LoanRepayments = [];
     }
 
     [Key]

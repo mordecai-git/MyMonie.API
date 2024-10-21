@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyMonie.API", "MyMonie.API\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyMonie.Core", "MyMonie.Core\MyMonie.Core.csproj", "{B325D260-B6E1-4D82-B746-8829E59FBC89}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyMonie.Test", "MyMonie.Test\MyMonie.Test.csproj", "{415F6DE2-743F-4209-8AFE-43E0F7A48682}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyMonie.Models", "MyMonie.Models\MyMonie.Models.csproj", "{B3EDDD5C-9F48-4226-8A4D-780BFC78A2A2}"
 EndProject
 Global
@@ -25,10 +23,6 @@ Global
 		{B325D260-B6E1-4D82-B746-8829E59FBC89}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B325D260-B6E1-4D82-B746-8829E59FBC89}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B325D260-B6E1-4D82-B746-8829E59FBC89}.Release|Any CPU.Build.0 = Release|Any CPU
-		{415F6DE2-743F-4209-8AFE-43E0F7A48682}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{415F6DE2-743F-4209-8AFE-43E0F7A48682}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{415F6DE2-743F-4209-8AFE-43E0F7A48682}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{415F6DE2-743F-4209-8AFE-43E0F7A48682}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B3EDDD5C-9F48-4226-8A4D-780BFC78A2A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B3EDDD5C-9F48-4226-8A4D-780BFC78A2A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B3EDDD5C-9F48-4226-8A4D-780BFC78A2A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -36,5 +30,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {77D4B13C-472A-42CB-B922-B0682DA54D09}
 	EndGlobalSection
 EndGlobal
