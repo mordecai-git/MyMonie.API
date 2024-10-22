@@ -1,4 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿// ========================================================================
+// Copyright (c) Kingdom Scripts Technology Solutions. All rights reserved.
+// Author: Mordecai Godwin
+// Website: https://kingdomscripts.com. Email: mordecai@kingdomscripts.com
+// ========================================================================
+
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -20,7 +26,7 @@ public partial class Account
     public int AccountGroupId { get; set; }
     [StringLength(50)]
     [Unicode(false)]
-    public string Name { get; set; } = null!;
+    public string Name { get; set; }
     [Column(TypeName = "money")]
     public decimal Balance { get; set; }
     public bool RecordTransferAsExpense { get; set; }
@@ -32,7 +38,7 @@ public partial class Account
 
     [ForeignKey(nameof(AccountGroupId))]
     [InverseProperty("Accounts")]
-    public virtual AccountGroup AccountGroup { get; set; } = null!;
+    public virtual AccountGroup AccountGroup { get; set; }
     [InverseProperty(nameof(LoanRepayment.Account))]
     public virtual ICollection<LoanRepayment> LoanRepayments { get; set; }
     [InverseProperty(nameof(Loan.Account))]

@@ -1,4 +1,10 @@
-﻿using System;
+﻿// ========================================================================
+// Copyright (c) Kingdom Scripts Technology Solutions. All rights reserved.
+// Author: Mordecai Godwin
+// Website: https://kingdomscripts.com. Email: mordecai@kingdomscripts.com
+// ========================================================================
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -23,7 +29,7 @@ public partial class Channel
     public byte Id { get; set; }
     [StringLength(50)]
     [Unicode(false)]
-    public string Name { get; set; } = null!;
+    public string Name { get; set; }
 
     [InverseProperty(nameof(DarkMode.Channel))]
     public virtual ICollection<DarkMode> DarkModes { get; set; }

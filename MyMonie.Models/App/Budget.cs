@@ -1,4 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿// ========================================================================
+// Copyright (c) Kingdom Scripts Technology Solutions. All rights reserved.
+// Author: Mordecai Godwin
+// Website: https://kingdomscripts.com. Email: mordecai@kingdomscripts.com
+// ========================================================================
+
+using Microsoft.EntityFrameworkCore;
 using MyMonie.Models.App;
 using System;
 using System.ComponentModel.DataAnnotations;
@@ -18,7 +24,7 @@ public partial class Budget
     public decimal Amount { get; set; }
     [StringLength(10)]
     [Unicode(false)]
-    public string Period { get; set; } = null!;
+    public string Period { get; set; }
     public DateTime DateCreated { get; set; }
 
     [ForeignKey(nameof(CategoryId))]
@@ -26,5 +32,5 @@ public partial class Budget
     public virtual Category Category { get; set; }
     [ForeignKey(nameof(UserId))]
     [InverseProperty("Budgets")]
-    public virtual User User { get; set; } = null!;
+    public virtual User User { get; set; }
 }

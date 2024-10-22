@@ -5,22 +5,19 @@
 // ========================================================================
 
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
 
-namespace MyMonie.Core.Models.App;
-
-[Table("Groups", Schema = "dbo")]
-public partial class Group
+namespace MyMonie.Models.App;
+public class RefreshToken
 {
-    [Key]
     public int Id { get; set; }
-    [StringLength(50)]
-    [Unicode(false)]
-    public string Name { get; set; }
-    [StringLength(2000)]
-    [Unicode(false)]
-    public string Description { get; set; }
+    [Required]
+    public int UserId { get; set; }
+    [Required]
+    [MaxLength(255)]
+    public string Code { get; set; }
+    public DateTime CreatedAtUtc { get; set; }
+    public DateTime ExpiresAtUtc { get; set; }
+    public DateTime UpdatedAtUtc { get; set; }
+    public User User { get; set; }
 }

@@ -1,4 +1,10 @@
-﻿using System;
+﻿// ========================================================================
+// Copyright (c) Kingdom Scripts Technology Solutions. All rights reserved.
+// Author: Mordecai Godwin
+// Website: https://kingdomscripts.com. Email: mordecai@kingdomscripts.com
+// ========================================================================
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -21,7 +27,7 @@ public partial class TransactionType
 
     [StringLength(8)]
     [Unicode(false)]
-    public string Name { get; set; } = null!;
+    public string Name { get; set; }
 
     [InverseProperty(nameof(RepeatTransaction.TransactionType))]
     public virtual ICollection<RepeatTransaction> RepeatTransactions { get; set; }

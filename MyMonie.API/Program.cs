@@ -1,3 +1,8 @@
+// ========================================================================
+// Copyright (c) Kingdom Scripts Technology Solutions. All rights reserved.
+// Author: Mordecai Godwin
+// Website: https://kingdomscripts.com. Email: mordecai@kingdomscripts.com
+// ========================================================================
 
 using FluentValidation;
 using Microsoft.AspNetCore.Builder;
@@ -6,7 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MyMonie.API;
-using MyMonie.Core;
+using MyMonie.Core.Middlewares;
 using MyMonie.Models.App;
 using Serilog;
 

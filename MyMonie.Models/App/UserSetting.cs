@@ -1,4 +1,10 @@
-﻿using System;
+﻿// ========================================================================
+// Copyright (c) Kingdom Scripts Technology Solutions. All rights reserved.
+// Author: Mordecai Godwin
+// Website: https://kingdomscripts.com. Email: mordecai@kingdomscripts.com
+// ========================================================================
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -17,7 +23,7 @@ public partial class UserSetting
     public byte? MonthlyStartDate { get; set; }
     [StringLength(10)]
     [Unicode(false)]
-    public string WeeklyStartDay { get; set; } = null!;
+    public string WeeklyStartDay { get; set; }
     public bool IsCarryOver { get; set; }
     public bool ShowDescription { get; set; }
     public bool AutoCompleteActive { get; set; }
@@ -27,11 +33,11 @@ public partial class UserSetting
 
     [ForeignKey(nameof(PrimaryCurrencyId))]
     [InverseProperty(nameof(Currency.UserSettingPrimaryCurrencies))]
-    public virtual Currency PrimaryCurrency { get; set; } = null!;
+    public virtual Currency PrimaryCurrency { get; set; }
     [ForeignKey(nameof(SecondaryCurrencyId))]
     [InverseProperty(nameof(Currency.UserSettingSecondaryCurrencies))]
-    public virtual Currency SecondaryCurrency { get; set; } = null!;
+    public virtual Currency SecondaryCurrency { get; set; }
     [ForeignKey(nameof(UserId))]
     [InverseProperty("UserSetting")]
-    public virtual User User { get; set; } = null!;
+    public virtual User User { get; set; }
 }

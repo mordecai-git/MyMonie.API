@@ -4,25 +4,25 @@
 // Website: https://kingdomscripts.com. Email: mordecai@kingdomscripts.com
 // ========================================================================
 
+using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
-using MyMonie.Models.App;
 
-namespace MyMonie.Core.Models.App;
-
-[Keyless]
-[Table("UserGroups", Schema = "dbo")]
-public partial class UserGroup
+namespace MyMonie.Models.App;
+public partial class Login : BaseAppModel
 {
     public int UserId { get; set; }
-    public int GroupId { get; set; }
-    public bool IsOwner { get; set; }
 
-    [ForeignKey(nameof(GroupId))]
-    public virtual Group Group { get; set; }
-    [ForeignKey(nameof(UserId))]
+    [StringLength(255)]
+    [Unicode(false)]
+    public string HashedToken { get; set; }
+
+    [Column(TypeName = "datetime")]
+    public DateTime ExpiryDateUtc { get; set; }
+
+    [Column(TypeName = "datetime")]
+    public new DateTime? DateCreatedUtc { get; set; }
+
     public virtual User User { get; set; }
 }

@@ -1,4 +1,10 @@
-﻿using System;
+﻿// ========================================================================
+// Copyright (c) Kingdom Scripts Technology Solutions. All rights reserved.
+// Author: Mordecai Godwin
+// Website: https://kingdomscripts.com. Email: mordecai@kingdomscripts.com
+// ========================================================================
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -19,8 +25,8 @@ public partial class LoanRepayment
 
     [ForeignKey(nameof(AccountId))]
     [InverseProperty("LoanRepayments")]
-    public virtual Account Account { get; set; } = null!;
+    public virtual Account Account { get; set; }
     [ForeignKey(nameof(LoanId))]
     [InverseProperty("LoanRepayments")]
-    public virtual Loan Loan { get; set; } = null!;
+    public virtual Loan Loan { get; set; }
 }

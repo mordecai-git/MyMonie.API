@@ -1,4 +1,10 @@
-﻿using System;
+﻿// ========================================================================
+// Copyright (c) Kingdom Scripts Technology Solutions. All rights reserved.
+// Author: Mordecai Godwin
+// Website: https://kingdomscripts.com. Email: mordecai@kingdomscripts.com
+// ========================================================================
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -26,22 +32,22 @@ public partial class RepeatTransaction
     public short IntervalCount { get; set; }
     [StringLength(10)]
     [Unicode(false)]
-    public string IntervalDescription { get; set; } = null!;
+    public string IntervalDescription { get; set; }
     public DateTime? EndDate { get; set; }
     public byte ChannelId { get; set; }
 
     [ForeignKey(nameof(CategoryId))]
     [InverseProperty("RepeatTransactions")]
-    public virtual Category Category { get; set; } = null!;
+    public virtual Category Category { get; set; }
     [ForeignKey(nameof(ChannelId))]
     [InverseProperty("RepeatTransactions")]
-    public virtual Channel Channel { get; set; } = null!;
+    public virtual Channel Channel { get; set; }
     [ForeignKey(nameof(TransactionTypeId))]
     [InverseProperty("RepeatTransactions")]
-    public virtual TransactionType TransactionType { get; set; } = null!;
+    public virtual TransactionType TransactionType { get; set; }
     [ForeignKey(nameof(UserId))]
     [InverseProperty("RepeatTransactions")]
-    public virtual User User { get; set; } = null!;
+    public virtual User User { get; set; }
     [InverseProperty(nameof(TransactionQueue.RepeatTransaction))]
     public virtual ICollection<TransactionQueue> TransactionQueues { get; set; }
 }

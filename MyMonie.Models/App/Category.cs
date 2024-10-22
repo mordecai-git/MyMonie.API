@@ -1,4 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿// ========================================================================
+// Copyright (c) Kingdom Scripts Technology Solutions. All rights reserved.
+// Author: Mordecai Godwin
+// Website: https://kingdomscripts.com. Email: mordecai@kingdomscripts.com
+// ========================================================================
+
+using Microsoft.EntityFrameworkCore;
 using MyMonie.Core.Models.App;
 using System;
 using System.Collections.Generic;
@@ -23,13 +29,13 @@ public partial class Category
     public int Id { get; set; }
     [StringLength(50)]
     [Unicode(false)]
-    public string Name { get; set; } = null!;
+    public string Name { get; set; }
     public DateTime DateCreated { get; set; }
     public int CreatedById { get; set; }
 
     [ForeignKey(nameof(CreatedById))]
     [InverseProperty(nameof(User.Categories))]
-    public virtual User CreatedBy { get; set; } = null!;
+    public virtual User CreatedBy { get; set; }
     [InverseProperty(nameof(Budget.Category))]
     public virtual ICollection<Budget> Budgets { get; set; }
     [InverseProperty(nameof(RepeatTransaction.Category))]

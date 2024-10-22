@@ -1,4 +1,10 @@
-﻿using System;
+﻿// ========================================================================
+// Copyright (c) Kingdom Scripts Technology Solutions. All rights reserved.
+// Author: Mordecai Godwin
+// Website: https://kingdomscripts.com. Email: mordecai@kingdomscripts.com
+// ========================================================================
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -20,14 +26,14 @@ public partial class LoanInterest
     public short Percentage { get; set; }
     [StringLength(10)]
     [Unicode(false)]
-    public string Interval { get; set; } = null!;
+    public string Interval { get; set; }
     [StringLength(13)]
     [Unicode(false)]
-    public string PaymentScheme { get; set; } = null!;
+    public string PaymentScheme { get; set; }
 
     [ForeignKey(nameof(LoanId))]
     [InverseProperty("LoanInterests")]
-    public virtual Loan Loan { get; set; } = null!;
+    public virtual Loan Loan { get; set; }
     [InverseProperty("Interest")]
     public virtual ICollection<Loan> Loans { get; set; }
 }

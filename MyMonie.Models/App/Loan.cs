@@ -1,4 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿// ========================================================================
+// Copyright (c) Kingdom Scripts Technology Solutions. All rights reserved.
+// Author: Mordecai Godwin
+// Website: https://kingdomscripts.com. Email: mordecai@kingdomscripts.com
+// ========================================================================
+
+using Microsoft.EntityFrameworkCore;
 using MyMonie.Models.App;
 using System;
 using System.Collections.Generic;
@@ -23,10 +29,10 @@ public partial class Loan
     public int? InterestId { get; set; }
     [StringLength(4)]
     [Unicode(false)]
-    public string LoanType { get; set; } = null!;
+    public string LoanType { get; set; }
     [StringLength(50)]
     [Unicode(false)]
-    public string Name { get; set; } = null!;
+    public string Name { get; set; }
     [Column(TypeName = "money")]
     public decimal Amount { get; set; }
     [Column(TypeName = "money")]
@@ -35,7 +41,7 @@ public partial class Loan
     public decimal RepaymentAmountPerPeriod { get; set; }
     [StringLength(10)]
     [Unicode(false)]
-    public string RepaymentInterval { get; set; } = null!;
+    public string RepaymentInterval { get; set; }
     public bool IsFullyPaid { get; set; }
     public DateTime? FullRepaymentDate { get; set; }
     public DateTime DateCreated { get; set; }
@@ -44,16 +50,16 @@ public partial class Loan
 
     [ForeignKey(nameof(AccountId))]
     [InverseProperty("Loans")]
-    public virtual Account Account { get; set; } = null!;
+    public virtual Account Account { get; set; }
     [ForeignKey(nameof(ChannelId))]
     [InverseProperty("Loans")]
-    public virtual Channel Channel { get; set; } = null!;
+    public virtual Channel Channel { get; set; }
     [ForeignKey(nameof(InterestId))]
     [InverseProperty(nameof(LoanInterest.Loans))]
     public virtual LoanInterest Interest { get; set; }
     [ForeignKey(nameof(UserId))]
     [InverseProperty("Loans")]
-    public virtual User User { get; set; } = null!;
+    public virtual User User { get; set; }
     [InverseProperty(nameof(LoanInterest.Loan))]
     public virtual ICollection<LoanInterest> LoanInterests { get; set; }
     [InverseProperty(nameof(LoanRepayment.Loan))]

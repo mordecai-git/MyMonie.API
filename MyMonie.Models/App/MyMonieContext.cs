@@ -1,4 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿// ========================================================================
+// Copyright (c) Kingdom Scripts Technology Solutions. All rights reserved.
+// Author: Mordecai Godwin
+// Website: https://kingdomscripts.com. Email: mordecai@kingdomscripts.com
+// ========================================================================
+
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using MyMonie.Core.Models.App;
 
@@ -8,26 +14,31 @@ public partial class MyMonieContext(DbContextOptions<MyMonieContext> options) : 
 {
     protected readonly IConfiguration Configuration;
 
-    public virtual DbSet<Account> Accounts { get; set; } = null!;
-    public virtual DbSet<AccountGroup> AccountGroups { get; set; } = null!;
-    public virtual DbSet<Budget> Budgets { get; set; } = null!;
-    public virtual DbSet<Category> Categories { get; set; } = null!;
-    public virtual DbSet<Channel> Channels { get; set; } = null!;
-    public virtual DbSet<Code> Codes { get; set; } = null!;
-    public virtual DbSet<Currency> Currencies { get; set; } = null!;
-    public virtual DbSet<DarkMode> DarkModes { get; set; } = null!;
-    public virtual DbSet<Group> Groups { get; set; } = null!;
-    public virtual DbSet<Loan> Loans { get; set; } = null!;
-    public virtual DbSet<LoanInterest> LoanInterests { get; set; } = null!;
-    public virtual DbSet<LoanRepayment> LoanRepayments { get; set; } = null!;
-    public virtual DbSet<RepeatTransaction> RepeatTransactions { get; set; } = null!;
-    public virtual DbSet<Transaction> Transactions { get; set; } = null!;
-    public virtual DbSet<TransactionQueue> TransactionQueues { get; set; } = null!;
-    public virtual DbSet<TransactionType> TransactionTypes { get; set; } = null!;
-    public virtual DbSet<User> Users { get; set; } = null!;
-    public virtual DbSet<UserCategory> UserCategories { get; set; } = null!;
-    public virtual DbSet<UserGroup> UserGroups { get; set; } = null!;
-    public virtual DbSet<UserSetting> UserSettings { get; set; } = null!;
+    public virtual DbSet<Account> Accounts { get; set; }
+    public virtual DbSet<AccountGroup> AccountGroups { get; set; }
+    public virtual DbSet<Budget> Budgets { get; set; }
+    public virtual DbSet<Category> Categories { get; set; }
+    public virtual DbSet<Channel> Channels { get; set; }
+    public virtual DbSet<Code> Codes { get; set; }
+    public virtual DbSet<Currency> Currencies { get; set; }
+    public virtual DbSet<DarkMode> DarkModes { get; set; }
+    public virtual DbSet<Document> Documents { get; set; }
+    public virtual DbSet<Group> Groups { get; set; }
+    public virtual DbSet<Loan> Loans { get; set; }
+    public virtual DbSet<Login> Logins { get; set; }
+    public virtual DbSet<LoanInterest> LoanInterests { get; set; }
+    public virtual DbSet<LoanRepayment> LoanRepayments { get; set; }
+    public virtual DbSet<RefreshToken> RefreshTokens { get; set; }
+    public virtual DbSet<RepeatTransaction> RepeatTransactions { get; set; }
+    public virtual DbSet<Role> Roles { get; set; }
+    public virtual DbSet<Transaction> Transactions { get; set; }
+    public virtual DbSet<TransactionQueue> TransactionQueues { get; set; }
+    public virtual DbSet<TransactionType> TransactionTypes { get; set; }
+    public virtual DbSet<User> Users { get; set; }
+    public virtual DbSet<UserCategory> UserCategories { get; set; }
+    public virtual DbSet<UserGroup> UserGroups { get; set; }
+    public virtual DbSet<UserSetting> UserSettings { get; set; }
+    public virtual DbSet<UserRole> UserRoles { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -265,7 +276,7 @@ public partial class MyMonieContext(DbContextOptions<MyMonieContext> options) : 
 
         modelBuilder.Entity<User>(entity =>
         {
-            entity.Property(e => e.DateCreated).HasDefaultValueSql("(getdate())");
+            entity.Property(e => e.DateCreatedUtc).HasDefaultValueSql("(getdate())");
 
             entity.HasOne(d => d.Channel)
                 .WithMany(p => p.Users)

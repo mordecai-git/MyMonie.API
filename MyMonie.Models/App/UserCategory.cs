@@ -1,4 +1,10 @@
-﻿using MyMonie.Models.App;
+﻿// ========================================================================
+// Copyright (c) Kingdom Scripts Technology Solutions. All rights reserved.
+// Author: Mordecai Godwin
+// Website: https://kingdomscripts.com. Email: mordecai@kingdomscripts.com
+// ========================================================================
+
+using MyMonie.Models.App;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -17,14 +23,14 @@ public partial class UserCategory
 
     [ForeignKey(nameof(CategoryId))]
     [InverseProperty("UserCategoryCategories")]
-    public virtual Category Category { get; set; } = null!;
+    public virtual Category Category { get; set; }
     [ForeignKey(nameof(ParentId))]
     [InverseProperty("UserCategoryParents")]
     public virtual Category Parent { get; set; }
     [ForeignKey(nameof(TransactionTypeId))]
     [InverseProperty("UserCategories")]
-    public virtual TransactionType TransactionType { get; set; } = null!;
+    public virtual TransactionType TransactionType { get; set; }
     [ForeignKey(nameof(UserId))]
     [InverseProperty("UserCategories")]
-    public virtual User User { get; set; } = null!;
+    public virtual User User { get; set; }
 }

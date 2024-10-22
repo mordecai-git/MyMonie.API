@@ -1,5 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿// ========================================================================
+// Copyright (c) Kingdom Scripts Technology Solutions. All rights reserved.
+// Author: Mordecai Godwin
+// Website: https://kingdomscripts.com. Email: mordecai@kingdomscripts.com
+// ========================================================================
+
+using Microsoft.EntityFrameworkCore;
 using MyMonie.Core.Models.App;
+using MyMonie.Models.Constants;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -7,62 +14,46 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MyMonie.Models.App;
 
-[Table("Users", Schema = "dbo")]
-[Index(nameof(Email), Name = "UQ__Users__A9D10534EC57A06E", IsUnique = true)]
+[Table(nameof(User), Schema = Schemas.Users)]
+[Index(nameof(Email), IsUnique = true)]
 public partial class User
 {
-    public User()
-    {
-        AccountGroups = [];
-        Budgets = [];
-        Categories = [];
-        Codes = [];
-        Loans = [];
-        RepeatTransactions = [];
-        Transactions = [];
-        UserCategories = [];
-    }
-
-    [Key]
     public int Id { get; set; }
+    public Guid Uid { get; set; }
+
     [StringLength(150)]
     [Unicode(false)]
-    public string Email { get; set; } = null!;
+    public string Email { get; set; }
+
     public bool EmailVerified { get; set; }
+
     [StringLength(50)]
     [Unicode(false)]
-    public string FirstName { get; set; } = null!;
+    public string FirstName { get; set; }
+
     [StringLength(50)]
     [Unicode(false)]
-    public string LastName { get; set; } = null!;
+    public string LastName { get; set; }
+
     [StringLength(255)]
     [Unicode(false)]
-    public string PasswordHash { get; set; } = null!;
-    public DateTime DateCreated { get; set; }
+    public string PasswordHash { get; set; }
+    public DateTime DateCreatedUtc { get; set; }
+    public DateTime LastDateUpdatedUtc { get; set; }
     public byte ChannelId { get; set; }
     public bool? TwoFactorEnabled { get; set; }
+    public int? AvatarId { get; set; }
 
-    [ForeignKey(nameof(ChannelId))]
-    [InverseProperty("Users")]
-    public virtual Channel Channel { get; set; } = null!;
-    [InverseProperty("User")]
-    public virtual DarkMode DarkMode { get; set; } = null!;
-    [InverseProperty("User")]
-    public virtual UserSetting UserSetting { get; set; } = null!;
-    [InverseProperty(nameof(AccountGroup.User))]
+    public virtual Document Avatar { get; set; }
+    public virtual Channel Channel { get; set; }
+    public virtual DarkMode DarkMode { get; set; }
+    public virtual UserSetting UserSetting { get; set; }
     public virtual ICollection<AccountGroup> AccountGroups { get; set; }
-    [InverseProperty(nameof(Budget.User))]
     public virtual ICollection<Budget> Budgets { get; set; }
-    [InverseProperty(nameof(Category.CreatedBy))]
     public virtual ICollection<Category> Categories { get; set; }
-    [InverseProperty(nameof(Code.User))]
     public virtual ICollection<Code> Codes { get; set; }
-    [InverseProperty(nameof(Loan.User))]
     public virtual ICollection<Loan> Loans { get; set; }
-    [InverseProperty(nameof(RepeatTransaction.User))]
     public virtual ICollection<RepeatTransaction> RepeatTransactions { get; set; }
-    [InverseProperty(nameof(Transaction.User))]
     public virtual ICollection<Transaction> Transactions { get; set; }
-    [InverseProperty(nameof(UserCategory.User))]
     public virtual ICollection<UserCategory> UserCategories { get; set; }
 }

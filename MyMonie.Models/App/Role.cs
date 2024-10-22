@@ -4,23 +4,17 @@
 // Website: https://kingdomscripts.com. Email: mordecai@kingdomscripts.com
 // ========================================================================
 
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
 
-namespace MyMonie.Core.Models.App;
-
-[Table("Groups", Schema = "dbo")]
-public partial class Group
+namespace MyMonie.Models.App;
+public class Role
 {
-    [Key]
     public int Id { get; set; }
+
+    [Required]
     [StringLength(50)]
-    [Unicode(false)]
     public string Name { get; set; }
-    [StringLength(2000)]
-    [Unicode(false)]
-    public string Description { get; set; }
+
+    public ICollection<UserRole> UserRoles { get; set; }
 }

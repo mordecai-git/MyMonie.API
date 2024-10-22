@@ -1,4 +1,10 @@
-﻿using System;
+﻿// ========================================================================
+// Copyright (c) Kingdom Scripts Technology Solutions. All rights reserved.
+// Author: Mordecai Godwin
+// Website: https://kingdomscripts.com. Email: mordecai@kingdomscripts.com
+// ========================================================================
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -16,12 +22,12 @@ public partial class Code
     [Column("Code")]
     [StringLength(6)]
     [Unicode(false)]
-    public string Code1 { get; set; } = null!;
+    public string Code1 { get; set; }
     public DateTime DateCreated { get; set; }
     public DateTime ExpiryDate { get; set; }
     public bool IsUsed { get; set; }
 
     [ForeignKey(nameof(UserId))]
     [InverseProperty("Codes")]
-    public virtual User User { get; set; } = null!;
+    public virtual User User { get; set; }
 }
