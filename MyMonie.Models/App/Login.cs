@@ -12,17 +12,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace MyMonie.Models.App;
 public partial class Login : BaseAppModel
 {
-    public int UserId { get; set; }
+    public required int UserId { get; set; }
 
     [StringLength(255)]
     [Unicode(false)]
-    public string HashedToken { get; set; }
+    public required string HashedToken { get; set; }
 
     [Column(TypeName = "datetime")]
-    public DateTime ExpiryDateUtc { get; set; }
-
-    [Column(TypeName = "datetime")]
-    public new DateTime? DateCreatedUtc { get; set; }
+    public required DateTime ExpiryDateUtc { get; set; }
 
     public virtual User User { get; set; }
 }

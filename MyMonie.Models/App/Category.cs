@@ -5,7 +5,8 @@
 // ========================================================================
 
 using Microsoft.EntityFrameworkCore;
-using MyMonie.Core.Models.App;
+using MyMonie.Models.Constants;
+using MyMonie.Models.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -13,37 +14,24 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MyMonie.Models.App;
 
-[Table("Categories", Schema = "dbo")]
-public partial class Category
+[Table("Categories", Schema = Schemas.Account)]
+public partial class Category : BaseAppModel, ISoftDeletable
 {
-    public Category()
-    {
-        Budgets = [];
-        RepeatTransactions = [];
-        Transactions = [];
-        UserCategoryCategories = [];
-        UserCategoryParents = [];
-    }
-
-    [Key]
-    public int Id { get; set; }
-    [StringLength(50)]
+    [StringLength(255)]
     [Unicode(false)]
-    public string Name { get; set; }
-    public DateTime DateCreated { get; set; }
-    public int CreatedById { get; set; }
+    public required string Name { get; set; }
 
-    [ForeignKey(nameof(CreatedById))]
-    [InverseProperty(nameof(User.Categories))]
-    public virtual User CreatedBy { get; set; }
-    [InverseProperty(nameof(Budget.Category))]
+    /// <summary>
+    /// Stores the name in lower case and space character replaced with hypen
+    /// </summary>
+    [StringLength(100)]
+    [Unicode(false)]
+    public required string Tag { get; set; }
+    public bool IsDeleted { get; set; }
+    public int? DeletedById { get; set; }
+    public DateTime? DeletedOnUtc { get; set; }
+
     public virtual ICollection<Budget> Budgets { get; set; }
-    [InverseProperty(nameof(RepeatTransaction.Category))]
     public virtual ICollection<RepeatTransaction> RepeatTransactions { get; set; }
-    [InverseProperty(nameof(Transaction.Category))]
     public virtual ICollection<Transaction> Transactions { get; set; }
-    [InverseProperty(nameof(UserCategory.Category))]
-    public virtual ICollection<UserCategory> UserCategoryCategories { get; set; }
-    [InverseProperty(nameof(UserCategory.Parent))]
-    public virtual ICollection<UserCategory> UserCategoryParents { get; set; }
 }

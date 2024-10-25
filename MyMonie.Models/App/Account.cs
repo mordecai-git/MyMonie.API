@@ -5,42 +5,66 @@
 // ========================================================================
 
 using Microsoft.EntityFrameworkCore;
+using MyMonie.Models.Constants;
+using MyMonie.Models.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace MyMonie.Core.Models.App;
+namespace MyMonie.Models.App;
 
-[Table("Accounts", Schema = "dbo")]
-public partial class Account
+[Table("Accounts", Schema = Schemas.Account)]
+public partial class Account : BaseAppModel, ISoftDeletable
 {
-    public Account()
-    {
-        LoanRepayments = [];
-        Loans = [];
-    }
+    public required int UserId { get; set; }
 
-    [Key]
-    public int Id { get; set; }
-    public int AccountGroupId { get; set; }
-    [StringLength(50)]
+    public required int AccountGroupId { get; set; }
+
+    [StringLength(255)]
     [Unicode(false)]
-    public string Name { get; set; }
+    public required string Name { get; set; }
+
     [Column(TypeName = "money")]
-    public decimal Balance { get; set; }
+    public decimal Balance { get; set; } = 0m;
+
+    /// <summary>
+    /// Record outgoing transfers as expense and incoming tranfers
+    /// as income. E.g., for savings, investments, etc
+    /// </summary>
     public bool RecordTransferAsExpense { get; set; }
+
     [StringLength(2000)]
     [Unicode(false)]
     public string Description { get; set; }
-    public bool IsDeleted { get; set; }
-    public DateTime? DateDeleted { get; set; }
 
-    [ForeignKey(nameof(AccountGroupId))]
-    [InverseProperty("Accounts")]
+    /// <summary>
+    /// This is only required when account belogs to a group that is
+    /// either a CreditCard or DebitCard group.
+    /// </summary>
+    public int? BillingAccountId { get; set; }
+
+    /// <summary>
+    /// This is only required when account belogs to a group that is
+    /// either a CreditCard or DebitCard group.
+    /// This is the date that the cycle ends and the bill is generated
+    /// </summary>
+    public DateTime? SettlementDateUtc { get; set; }
+
+    /// <summary>
+    /// This is only required when account belogs to a group that is
+    /// either a CreditCard or DebitCard group.
+    /// This is the date that the bill is due for payment.
+    /// </summary>
+    public DateTime? PaymentDateUtc { get; set; }
+
+    public bool IsDeleted { get; set; }
+    public int? DeletedById { get; set; }
+    public DateTime? DeletedOnUtc { get; set; }
+
+    public virtual User User { get; set; }
     public virtual AccountGroup AccountGroup { get; set; }
-    [InverseProperty(nameof(LoanRepayment.Account))]
+    public virtual Account BillingAccount { get; set; }
     public virtual ICollection<LoanRepayment> LoanRepayments { get; set; }
-    [InverseProperty(nameof(Loan.Account))]
     public virtual ICollection<Loan> Loans { get; set; }
 }

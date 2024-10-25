@@ -4,30 +4,34 @@
 // Website: https://kingdomscripts.com. Email: mordecai@kingdomscripts.com
 // ========================================================================
 
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
-using MyMonie.Models.App;
+using MyMonie.Models.App.Converters;
+using MyMonie.Models.Constants;
+using System;
+using System.ComponentModel.DataAnnotations;
 
-namespace MyMonie.Core.Models.App;
+namespace MyMonie.Models.App;
 
-[Table("Codes", Schema = "dbo")]
 public partial class Code
 {
-    [Key]
     public int Id { get; set; }
-    public int UserId { get; set; }
-    [Column("Code")]
+    public required int UserId { get; set; }
+
+    /// <summary>
+    /// A 6 digit code to use for validation.
+    /// </summary>
     [StringLength(6)]
     [Unicode(false)]
-    public string Code1 { get; set; }
-    public DateTime DateCreated { get; set; }
-    public DateTime ExpiryDate { get; set; }
+    public required string CodeText { get; set; }
+
+    [StringLength(25)]
+    [Unicode(false)]
+    [ValueConverter(typeof(CodeTypeConverter))]
+    public required CodeType Type { get; set; }
+
+    public DateTime CreatedOnUtc { get; set; } = DateTime.UtcNow;
+    public required DateTime ExpiresOnUtc { get; set; }
     public bool IsUsed { get; set; }
 
-    [ForeignKey(nameof(UserId))]
-    [InverseProperty("Codes")]
     public virtual User User { get; set; }
 }

@@ -4,23 +4,30 @@
 // Website: https://kingdomscripts.com. Email: mordecai@kingdomscripts.com
 // ========================================================================
 
+using Microsoft.EntityFrameworkCore;
+using MyMonie.Models.Constants;
+using MyMonie.Models.Interfaces;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
 
-namespace MyMonie.Core.Models.App;
+namespace MyMonie.Models.App;
 
-[Table("Groups", Schema = "dbo")]
-public partial class Group
+/// <summary>
+/// This table stores the group information of users
+/// </summary>
+[Table("Groups", Schema = Schemas.Account)]
+public partial class Group : BaseAppModel, ISoftDeletable
 {
-    [Key]
-    public int Id { get; set; }
-    [StringLength(50)]
+    [StringLength(255)]
     [Unicode(false)]
-    public string Name { get; set; }
+    public required string Name { get; set; }
+
     [StringLength(2000)]
     [Unicode(false)]
     public string Description { get; set; }
+
+    public bool IsDeleted { get; set; }
+    public int? DeletedById { get; set; }
+    public DateTime? DeletedOnUtc { get; set; }
 }

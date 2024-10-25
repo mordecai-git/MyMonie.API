@@ -5,63 +5,75 @@
 // ========================================================================
 
 using Microsoft.EntityFrameworkCore;
-using MyMonie.Models.App;
+using MyMonie.Models.App.Converters;
+using MyMonie.Models.Constants;
+using MyMonie.Models.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace MyMonie.Core.Models.App;
+namespace MyMonie.Models.App;
 
-[Table("Loans", Schema = "dbo")]
-public partial class Loan
+[Table("Loans", Schema = Schemas.Loans)]
+public partial class Loan : BaseAppModel, ISoftDeletable
 {
-    public Loan()
-    {
-        LoanInterests = [];
-        LoanRepayments = [];
-    }
-
-    [Key]
-    public int Id { get; set; }
-    public int UserId { get; set; }
-    public int AccountId { get; set; }
+    public required int UserId { get; set; }
+    public required int AccountId { get; set; }
     public int? InterestId { get; set; }
+
+    /// <summary>
+    /// Inbound: The money the user borrowed; Outbound: The money that the user borrowed others
+    /// </summary>
     [StringLength(4)]
     [Unicode(false)]
-    public string LoanType { get; set; }
-    [StringLength(50)]
+    [ValueConverter(typeof(LoanTypeConverter))]
+    public required LoanTypes LoanType { get; set; }
+
+    /// <summary>
+    /// The name of person or entity the user is taking or giving a loan
+    /// </summary>
+    [StringLength(255)]
     [Unicode(false)]
-    public string Name { get; set; }
+    public required string Name { get; set; }
+
+    /// <summary>
+    /// The amount borrowed or borrowed out. This is the principal amount
+    /// </summary>
     [Column(TypeName = "money")]
-    public decimal Amount { get; set; }
+    public required decimal Amount { get; set; }
+
+    /// <summary>
+    /// The amount remaining. 
+    /// </summary>
     [Column(TypeName = "money")]
-    public decimal Balance { get; set; }
+    public required decimal Balance { get; set; }
+
     [Column(TypeName = "money")]
-    public decimal RepaymentAmountPerPeriod { get; set; }
+    public required decimal RepaymentAmountPerPeriod { get; set; }
+
     [StringLength(10)]
     [Unicode(false)]
-    public string RepaymentInterval { get; set; }
-    public bool IsFullyPaid { get; set; }
-    public DateTime? FullRepaymentDate { get; set; }
-    public DateTime DateCreated { get; set; }
-    public DateTime DeadlineDate { get; set; }
-    public byte ChannelId { get; set; }
+    [ValueConverter(typeof(PeriodIntervalConverter))]
+    public required PeriodInterval RepaymentInterval { get; set; }
 
-    [ForeignKey(nameof(AccountId))]
-    [InverseProperty("Loans")]
+    /// <summary>
+    /// When null, no payment made yet; when false/0, partial payment made; when true/1, full payment made
+    /// </summary>
+    [ValueConverter(typeof(LoanRepaymentStatusConverter))]
+    public required LoanRepaymentStatus RepaymentStatus { get; set; }
+
+    public DateTime? FullRepaymentDateUtc { get; set; }
+    public required DateTime DeadlineDateUtc { get; set; }
+    public required byte ChannelId { get; set; }
+    public bool IsDeleted { get; set; }
+    public int? DeletedById { get; set; }
+    public DateTime? DeletedOnUtc { get; set; }
+
     public virtual Account Account { get; set; }
-    [ForeignKey(nameof(ChannelId))]
-    [InverseProperty("Loans")]
     public virtual Channel Channel { get; set; }
-    [ForeignKey(nameof(InterestId))]
-    [InverseProperty(nameof(LoanInterest.Loans))]
     public virtual LoanInterest Interest { get; set; }
-    [ForeignKey(nameof(UserId))]
-    [InverseProperty("Loans")]
     public virtual User User { get; set; }
-    [InverseProperty(nameof(LoanInterest.Loan))]
     public virtual ICollection<LoanInterest> LoanInterests { get; set; }
-    [InverseProperty(nameof(LoanRepayment.Loan))]
     public virtual ICollection<LoanRepayment> LoanRepayments { get; set; }
 }

@@ -5,11 +5,9 @@
 // ========================================================================
 
 namespace MyMonie.Models.Constants;
-public static class Schemas
+public enum LoanRepaymentStatus
 {
-    public const string Settings = "setting";
-    public const string Users = "user";
-    public const string Account = "account";
-    public const string Transactions = "transaction";
-    public const string Loans = "loan";
+    NoPayment,
+    PartialPayment,
+    FullPayment
 }

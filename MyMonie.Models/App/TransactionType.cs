@@ -4,35 +4,27 @@
 // Website: https://kingdomscripts.com. Email: mordecai@kingdomscripts.com
 // ========================================================================
 
-using System;
+using Microsoft.EntityFrameworkCore;
+using MyMonie.Models.Constants;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
 
-namespace MyMonie.Core.Models.App;
+namespace MyMonie.Models.App;
 
-[Table("TransactionTypes", Schema = "dbo")]
+[Table("TransactionTypes", Schema = Schemas.Transactions)]
 public partial class TransactionType
 {
-    public TransactionType()
-    {
-        RepeatTransactions = [];
-        Transactions = [];
-        UserCategories = [];
-    }
-
     [Key]
     public short Id { get; set; }
 
+    /// <summary>
+    /// Expense, Income, Transfer, Loan
+    /// </summary>
     [StringLength(8)]
     [Unicode(false)]
     public string Name { get; set; }
 
-    [InverseProperty(nameof(RepeatTransaction.TransactionType))]
     public virtual ICollection<RepeatTransaction> RepeatTransactions { get; set; }
-    [InverseProperty(nameof(Transaction.TransactionType))]
     public virtual ICollection<Transaction> Transactions { get; set; }
-    [InverseProperty(nameof(UserCategory.TransactionType))]
-    public virtual ICollection<UserCategory> UserCategories { get; set; }
 }

@@ -4,50 +4,44 @@
 // Website: https://kingdomscripts.com. Email: mordecai@kingdomscripts.com
 // ========================================================================
 
+using Microsoft.EntityFrameworkCore;
+using MyMonie.Models.App.Converters;
+using MyMonie.Models.Constants;
+using MyMonie.Models.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
-using MyMonie.Models.App;
 
-namespace MyMonie.Core.Models.App;
+namespace MyMonie.Models.App;
 
-[Table("RepeatTransactions", Schema = "dbo")]
-public partial class RepeatTransaction
+/// <summary>
+/// This table stores the details of every repeating transations
+/// </summary>
+[Table("RepeatTransactions", Schema = Schemas.Transactions)]
+public partial class RepeatTransaction : BaseAppModel, ISoftDeletable
 {
-    public RepeatTransaction()
-    {
-        TransactionQueues = [];
-    }
-
-    [Key]
-    public int Id { get; set; }
-    public int UserId { get; set; }
-    public DateTime DateCreated { get; set; }
+    public required int UserId { get; set; }
     [Column(TypeName = "money")]
-    public decimal Amount { get; set; }
-    public int CategoryId { get; set; }
-    public short TransactionTypeId { get; set; }
-    public short IntervalCount { get; set; }
+    public required decimal Amount { get; set; }
+    public required int CategoryId { get; set; }
+    public required short TransactionTypeId { get; set; }
+    public required short IntervalCount { get; set; }
+
     [StringLength(10)]
     [Unicode(false)]
-    public string IntervalDescription { get; set; }
-    public DateTime? EndDate { get; set; }
-    public byte ChannelId { get; set; }
+    [ValueConverter(typeof(PeriodIntervalConverter))]
+    public required PeriodInterval IntervalDescription { get; set; }
 
-    [ForeignKey(nameof(CategoryId))]
-    [InverseProperty("RepeatTransactions")]
+    public required DateTime? EndDate { get; set; }
+    public required byte ChannelId { get; set; }
+    public int? DeletedById { get; set; }
+    public bool IsDeleted { get; set; }
+    public DateTime? DeletedOnUtc { get; set; }
+
     public virtual Category Category { get; set; }
-    [ForeignKey(nameof(ChannelId))]
-    [InverseProperty("RepeatTransactions")]
     public virtual Channel Channel { get; set; }
-    [ForeignKey(nameof(TransactionTypeId))]
-    [InverseProperty("RepeatTransactions")]
     public virtual TransactionType TransactionType { get; set; }
-    [ForeignKey(nameof(UserId))]
-    [InverseProperty("RepeatTransactions")]
     public virtual User User { get; set; }
-    [InverseProperty(nameof(TransactionQueue.RepeatTransaction))]
     public virtual ICollection<TransactionQueue> TransactionQueues { get; set; }
 }

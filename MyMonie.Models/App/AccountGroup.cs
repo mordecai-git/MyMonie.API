@@ -4,40 +4,38 @@
 // Website: https://kingdomscripts.com. Email: mordecai@kingdomscripts.com
 // ========================================================================
 
+using Microsoft.EntityFrameworkCore;
+using MyMonie.Models.App.Converters;
+using MyMonie.Models.Constants;
+using MyMonie.Models.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
-using MyMonie.Models.App;
 
-namespace MyMonie.Core.Models.App;
+namespace MyMonie.Models.App;
 
-[Table("AccountGroups", Schema = "dbo")]
-public partial class AccountGroup
+[Table("AccountGroups", Schema = Schemas.Account)]
+public partial class AccountGroup : BaseAppModel, ISoftDeletable
 {
-    public AccountGroup()
-    {
-        Accounts = [];
-    }
+    [StringLength(255)]
+    [Unicode(false)]
+    public required string Name { get; set; }
 
-    [Key]
-    public int Id { get; set; }
     [StringLength(50)]
     [Unicode(false)]
-    public string Name { get; set; }
-    [StringLength(10)]
-    [Unicode(false)]
-    public string Type { get; set; }
-    public int UserId { get; set; }
-    public bool IsPermanent { get; set; }
-    public DateTime DateCreated { get; set; }
-    public bool IsDeleted { get; set; }
-    public DateTime? DateDeleted { get; set; }
+    [ValueConverter(typeof(AccountGroupTypeConverter))]
+    public required AccountGroupType Type { get; set; } = AccountGroupType.Account;
+    public required int UserId { get; set; }
 
-    [ForeignKey(nameof(UserId))]
-    [InverseProperty("AccountGroups")]
+    /// <summary>
+    /// This determines if this account group is deletable or not.
+    /// </summary>
+    public bool IsPermanent { get; set; }
+    public bool IsDeleted { get; set; }
+    public int? DeletedById { get; set; }
+    public DateTime? DeletedOnUtc { get; set; }
+
     public virtual User User { get; set; }
-    [InverseProperty(nameof(Account.AccountGroup))]
     public virtual ICollection<Account> Accounts { get; set; }
 }

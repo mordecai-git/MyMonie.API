@@ -5,11 +5,13 @@
 // ========================================================================
 
 namespace MyMonie.Models.Constants;
-public static class Schemas
+public enum PeriodInterval
 {
-    public const string Settings = "setting";
-    public const string Users = "user";
-    public const string Account = "account";
-    public const string Transactions = "transaction";
-    public const string Loans = "loan";
+    Once,
+    Daily,
+    Weekly,
+    Monthly,
+    Quaterly,
+    BiAnnually,
+    Annually
 }

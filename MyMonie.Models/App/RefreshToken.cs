@@ -12,10 +12,10 @@ public class RefreshToken
 {
     public int Id { get; set; }
     [Required]
-    public int UserId { get; set; }
+    public required int UserId { get; set; }
     [Required]
     [MaxLength(255)]
-    public string Code { get; set; }
+    public required string HashedCode { get; set; }
     public DateTime CreatedAtUtc { get; set; }
     public DateTime ExpiresAtUtc { get; set; }
     public DateTime UpdatedAtUtc { get; set; }

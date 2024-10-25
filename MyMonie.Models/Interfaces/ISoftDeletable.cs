@@ -4,12 +4,12 @@
 // Website: https://kingdomscripts.com. Email: mordecai@kingdomscripts.com
 // ========================================================================
 
-namespace MyMonie.Models.Constants;
-public static class Schemas
+using System;
+
+namespace MyMonie.Models.Interfaces;
+public interface ISoftDeletable
 {
-    public const string Settings = "setting";
-    public const string Users = "user";
-    public const string Account = "account";
-    public const string Transactions = "transaction";
-    public const string Loans = "loan";
+    bool IsDeleted { get; set; }
+    int? DeletedById { get; set; }
+    DateTime? DeletedOnUtc { get; set; }
 }

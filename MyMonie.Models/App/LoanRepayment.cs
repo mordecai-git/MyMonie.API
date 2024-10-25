@@ -4,29 +4,25 @@
 // Website: https://kingdomscripts.com. Email: mordecai@kingdomscripts.com
 // ========================================================================
 
+using MyMonie.Models.Constants;
+using MyMonie.Models.Interfaces;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
 
-namespace MyMonie.Core.Models.App;
+namespace MyMonie.Models.App;
 
-[Table("LoanRepayments", Schema = "dbo")]
-public partial class LoanRepayment
+[Table("LoanRepayments", Schema = Schemas.Loans)]
+public partial class LoanRepayment : BaseAppModel, ISoftDeletable
 {
-    [Key]
-    public int Id { get; set; }
-    public int LoanId { get; set; }
-    public int AccountId { get; set; }
+    public required int LoanId { get; set; }
+    public required int AccountId { get; set; }
     [Column(TypeName = "money")]
-    public decimal Amount { get; set; }
-    public DateTime DateCreated { get; set; }
+    public required decimal Amount { get; set; }
 
-    [ForeignKey(nameof(AccountId))]
-    [InverseProperty("LoanRepayments")]
+    public bool IsDeleted { get; set; }
+    public int? DeletedById { get; set; }
+    public DateTime? DeletedOnUtc { get; set; }
+
     public virtual Account Account { get; set; }
-    [ForeignKey(nameof(LoanId))]
-    [InverseProperty("LoanRepayments")]
     public virtual Loan Loan { get; set; }
 }

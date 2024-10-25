@@ -4,12 +4,14 @@
 // Website: https://kingdomscripts.com. Email: mordecai@kingdomscripts.com
 // ========================================================================
 
-namespace MyMonie.Models.Constants;
-public static class Schemas
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using System;
+
+namespace MyMonie.Models.App.Converters;
+public class DayOfWeekConverter : ValueConverter<DayOfWeek, string>
 {
-    public const string Settings = "setting";
-    public const string Users = "user";
-    public const string Account = "account";
-    public const string Transactions = "transaction";
-    public const string Loans = "loan";
+    public DayOfWeekConverter() : base(
+        v => v.ToString(),
+        v => Enum.Parse<DayOfWeek>(v))
+    { }
 }

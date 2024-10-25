@@ -4,40 +4,40 @@
 // Website: https://kingdomscripts.com. Email: mordecai@kingdomscripts.com
 // ========================================================================
 
+using Microsoft.EntityFrameworkCore;
+using MyMonie.Models.App.Converters;
+using MyMonie.Models.Constants;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
-using MyMonie.Models.App;
 
-namespace MyMonie.Core.Models.App;
+namespace MyMonie.Models.App;
 
-[Table("UserSettings", Schema = "dbo")]
+[Table("UserSettings", Schema = Schemas.Users)]
 public partial class UserSetting
 {
     [Key]
-    public int UserId { get; set; }
-    public byte PrimaryCurrencyId { get; set; }
-    public byte SecondaryCurrencyId { get; set; }
-    public byte? MonthlyStartDate { get; set; }
+    public required int UserId { get; set; }
+    public required byte PrimaryCurrencyId { get; set; }
+    public required byte SecondaryCurrencyId { get; set; }
+    public byte MonthlyStartDay { get; set; } = 1;
+
     [StringLength(10)]
     [Unicode(false)]
-    public string WeeklyStartDay { get; set; }
+    [ValueConverter(typeof(DayOfWeekConverter))]
+    public DayOfWeek WeeklyStartDay { get; set; } = DayOfWeek.Monday;
+
     public bool IsCarryOver { get; set; }
-    public bool ShowDescription { get; set; }
-    public bool AutoCompleteActive { get; set; }
-    public short? Passcode { get; set; }
+    public bool ShowDescription { get; set; } = true;
+
+    [StringLength(255)]
+    [Unicode(false)]
+    public string PasscodeHash { get; set; } // TODO: Encripty this
+
     public DateTime? MobileReminderTime { get; set; }
     public DateTime? EmailReminderTime { get; set; }
 
-    [ForeignKey(nameof(PrimaryCurrencyId))]
-    [InverseProperty(nameof(Currency.UserSettingPrimaryCurrencies))]
     public virtual Currency PrimaryCurrency { get; set; }
-    [ForeignKey(nameof(SecondaryCurrencyId))]
-    [InverseProperty(nameof(Currency.UserSettingSecondaryCurrencies))]
     public virtual Currency SecondaryCurrency { get; set; }
-    [ForeignKey(nameof(UserId))]
-    [InverseProperty("UserSetting")]
     public virtual User User { get; set; }
 }

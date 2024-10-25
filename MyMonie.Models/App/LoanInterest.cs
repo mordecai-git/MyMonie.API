@@ -4,36 +4,37 @@
 // Website: https://kingdomscripts.com. Email: mordecai@kingdomscripts.com
 // ========================================================================
 
+using Microsoft.EntityFrameworkCore;
+using MyMonie.Models.App.Converters;
+using MyMonie.Models.Constants;
+using MyMonie.Models.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
 
-namespace MyMonie.Core.Models.App;
+namespace MyMonie.Models.App;
 
-[Table("LoanInterests", Schema = "dbo")]
-public partial class LoanInterest
+[Table("LoanInterests", Schema = Schemas.Loans)]
+public partial class LoanInterest : BaseAppModel, ISoftDeletable
 {
-    public LoanInterest()
-    {
-        Loans = [];
-    }
+    public required int LoanId { get; set; }
+    public required short Percentage { get; set; }
 
-    [Key]
-    public int Id { get; set; }
-    public int LoanId { get; set; }
-    public short Percentage { get; set; }
     [StringLength(10)]
     [Unicode(false)]
-    public string Interval { get; set; }
+    [ValueConverter(typeof(PeriodIntervalConverter))]
+    public required PeriodInterval Interval { get; set; }
+
     [StringLength(13)]
     [Unicode(false)]
-    public string PaymentScheme { get; set; }
+    [ValueConverter(typeof(LoanInterestPaymentConverter))]
+    public required LoanInterestPaymentScheme PaymentScheme { get; set; }
 
-    [ForeignKey(nameof(LoanId))]
-    [InverseProperty("LoanInterests")]
+    public bool IsDeleted { get; set; }
+    public int? DeletedById { get; set; }
+    public DateTime? DeletedOnUtc { get; set; }
+
     public virtual Loan Loan { get; set; }
-    [InverseProperty("Interest")]
     public virtual ICollection<Loan> Loans { get; set; }
 }
