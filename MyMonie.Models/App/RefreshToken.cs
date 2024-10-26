@@ -15,9 +15,9 @@ public class RefreshToken
     public required int UserId { get; set; }
     [Required]
     [MaxLength(255)]
-    public required string HashedCode { get; set; }
-    public DateTime CreatedAtUtc { get; set; }
-    public DateTime ExpiresAtUtc { get; set; }
-    public DateTime UpdatedAtUtc { get; set; }
+    public required string Code { get; set; }
+    public DateTime CreatedOnUtc { get; set; }
+    public DateTime ExpiresOnUtc { get; set; }
+    public DateTime UpdatedOnUtc { get; set; }
     public User User { get; set; }
 }

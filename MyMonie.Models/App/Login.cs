@@ -18,8 +18,11 @@ public partial class Login : BaseAppModel
     [Unicode(false)]
     public required string HashedToken { get; set; }
 
-    [Column(TypeName = "datetime")]
+    [Column(TypeName = "datetime2(7)")]
     public required DateTime ExpiryDateUtc { get; set; }
+
+    [Column(TypeName = "datetime2(7)")]
+    public DateTime? UpdatedOnUtc { get; set; }
 
     public virtual User User { get; set; }
 }

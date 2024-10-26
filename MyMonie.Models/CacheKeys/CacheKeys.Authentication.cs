@@ -6,11 +6,8 @@
 
 using System;
 
-namespace MyMonie.Models.View.Users;
-public class AuthDataViewModel
+namespace MyMonie.Models.CacheKeys;
+public partial class CacheKeys
 {
-    public UserViewModel User { get; set; }
-    public string Token { get; set; }
-    public string RefreshToken { get; set; }
-    public DateTime ExpiryDateUtc { get; set; }
+    public static string ValidateToken(Guid uid) => $"ValidateToken-{uid}";
 }
